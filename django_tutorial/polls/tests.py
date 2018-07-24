@@ -96,3 +96,12 @@ class QuestionDetailViewTests(TestCase):
         url = reverse('polls:detail', args=(past_question.id,))
         response = self.client.get(url)
         self.assertContains(response, past_question.question_text)
+
+class QuestionResultsViewTests(TestCase):
+    def test_results_url_passing_question(self):
+        question = create_question(question_text="Question viewed on results page", days=-1)
+        url = reverse('polls:results', kwargs={'question_id': question.id})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, question.question_text)
+        print(response.context)

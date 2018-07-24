@@ -11,7 +11,6 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
-
         return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
 
 # def index(req):
@@ -30,25 +29,20 @@ class DetailView(generic.DetailView):
 
     def get_queryset(self):
         return Question.objects.filter(pub_date__lte=timezone.now())
-# def detail(req, question_id):
-#     template = 'polls/detail.html'
-#     question = get_object_or_404(Question, pk=question_id)
-#     context = {
-#         'question':question
-#     }
-#     return render(req, template, context)
 
 
-class ResultsView(generic.DetailView):
-    model = Question
-    template_name = 'polls/results.html'
-# def results(req, question_id):
-#     template = 'polls/results.html'
-#     question = get_object_or_404(Question, pk=question_id)
-#     context = {
-#         'question':question
-#     }
-#     return render(req, template, context)
+
+# class ResultsView(generic.DetailView):
+#     model = Question
+#     template_name = 'polls/results.html'
+
+def results(req, question_id):
+    template = 'polls/results.html'
+    question = get_object_or_404(Question, pk=question_id)
+    context = {
+        'question': question,
+    }
+    return render(req, template, context)
 
 
 
@@ -66,7 +60,7 @@ def vote(req, question_id):
         selected_choice.votes += 1
         selected_choice.save()
 
-        return redirect(reverse('polls:results', kwargs={'pk':question_id}))
+        return redirect(reverse('polls:results', kwargs={'question_id':question_id}))
     
 
 
