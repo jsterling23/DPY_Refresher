@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Models Prac Index</title>
+</head>
+<body>
+    <h4>Just as the title says.</h4>
+    <h6> {{ example }} </h6>
+    <br><hr>
+    {% for i in people %}
+        {{ i.name }}
+    {% endfor %}
+    <br><hr>
+    {% for i in groups %}
+        {{ i.name }}
+    {% endfor %}
+    <br><hr>
+    {% for i in membership %}
+        <p>Name: {{ i.person }} | Group: {{ i.group }} | Joined: {{ i.date_joined }} | Reason: "{{ i.invite_reason }}"</p>
+    {% endfor %}
+    <br><hr>
+</body>
+</html>
